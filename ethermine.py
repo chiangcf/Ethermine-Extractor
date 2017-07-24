@@ -41,6 +41,7 @@ def extractEth(address, filename):
         currPay = pays.findAll("td")
         date = currPay[0].text[5:10]
         duration = currPay[3].text
+        
         if duration != '':
             duration = float(duration)
         amount = float(currPay[4].text.partition("E")[0])
@@ -50,7 +51,6 @@ def extractEth(address, filename):
         ws.write(row, 1, duration, style1)
         ws.write(row, 2, amount, style1)
         row+=1
-
 
     # Unpaid Balance from the pool
     r  = s.get("https://ethermine.org/miners/" + address)
@@ -76,8 +76,6 @@ def extractEth(address, filename):
     ws.write(1, 4, price, style1)
     ws.write(1, 5, totalValue, style1)
     wb.save(filename + ".xls")
-
-
 
 if __name__ == '__main__':
     print("Extracting info... Please wait...")
